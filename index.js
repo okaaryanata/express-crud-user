@@ -4,8 +4,10 @@ const roleRouter = require("./routers/role");
 const accountRouter = require("./routers/account");
 const account = require("./models/account");
 const role = require("./models/role");
+var cors = require("cors");
 
 const app = express();
+app.use(cors());
 
 role.sync();
 account.sync();

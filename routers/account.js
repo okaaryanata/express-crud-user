@@ -31,6 +31,27 @@ const accountSchema = {
     .required()
 };
 
+const accountEditSchema = {
+  firstname: Joi.string()
+    .min(3)
+    .required(),
+  lastname: Joi.string()
+    .min(3)
+    .required(),
+  username: Joi.string()
+    .min(3)
+    .required(),
+  password: Joi.string().min(6),
+  email: Joi.string()
+    .trim()
+    .email()
+    .required(),
+  role_id: Joi.number()
+    .integer()
+    .required(),
+  id: Joi.number().integer()
+};
+
 const loginSchema = {
   email: Joi.string().required(),
   password: Joi.string().required()
@@ -150,6 +171,7 @@ router.get("/auth", ensureToken, async (req, res, next) => {
       });
     } else {
       res.json({
+        results: "success",
         data: user
       });
     }
@@ -294,7 +316,7 @@ router.put("/users/:id", ensureToken, async (req, res, next) => {
         role_id
       } = req.body;
 
-      const resJoi = Joi.validate(req.body, accountSchema);
+      const resJoi = Joi.validate(req.body, accountEditSchema);
       if (resJoi.error) {
         res.status(400).json({
           results: "failed",
