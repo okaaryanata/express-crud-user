@@ -1,8 +1,8 @@
 const Sequelize = require("sequelize");
 const sequelize = new Sequelize(
   "circledu", //db name
-  "kumiskucing", // username
-  "seblak99", // pass
+  "user", // username
+  "pass", // pass
   {
     host: "localhost",
     dialect: "postgres",
